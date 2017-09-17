@@ -1,64 +1,34 @@
 #include "unity.h"
-#include "io_mapping.h"
+#define EXTERN
+#include "testable_registers.h"
+#include "io_map.h"
 #include "led_driver.h"
 
 void setUp(void)
 {
-    led_driver_create(&virtualLeds);
+    led_init();
 }
 
 void tearDown(void)
 {
 }
 
-void test_led_driver_LedsOffAfterCreate(void)
+void test_led_init(void)
 {
-    virtualLeds = 0xff;
-    led_driver_create(&virtualLeds);
-    TEST_ASSERT_EQUAL_HEX8(0, virtualLeds);
+    LED_OUT = 0xff;
+    led_init();
+    TEST_ASSERT_EQUAL_HEX8(0x00, LED_OUT);
 }
 
-void test_led_driver_TurnOnLedOne(void)
+void test_led_on(void)
 {
-	int ledBit = 0;
-    led_driver_turn_on(ledBit);
-    TEST_ASSERT_EQUAL_HEX8((1<<ledBit), virtualLeds);
+    led_on();
+    TEST_ASSERT_EQUAL_HEX8(LEDMASK, LED_OUT);
 }
 
-void test_led_driver_TurnOnLedBitFour(void)
+void test_led_off(void)
 {
-	int ledBit = 4;
-    led_driver_turn_on(ledBit);
-    TEST_ASSERT_EQUAL_HEX8((1<<(ledBit)), virtualLeds);
-}
-
-void test_led_driver_TurnOnMultipleLeds(void)
-{
-	led_driver_turn_on(0);
-    led_driver_turn_on(3);
-    TEST_ASSERT_EQUAL_HEX8(9, virtualLeds);
-}
-
-void test_led_driver_TurnOffAll(void)
-{
-	led_driver_turn_on(0);
-	led_driver_turn_on(3);
-	led_driver_turn_all_off();
-	TEST_ASSERT_EQUAL_HEX8(0, virtualLeds);
-}
-
-void test_led_driver_TurnAllOn(void)
-{
-	led_driver_turn_on(0);
-	led_driver_turn_on(3);
-	led_driver_turn_all_on();
-	TEST_ASSERT_EQUAL_HEX8(0xff, virtualLeds);
-}
-
-void test_led_driver_TurnOffLedOne(void)
-{
-	led_driver_turn_all_on();
-	led_driver_turn_off(0);
-	TEST_ASSERT_EQUAL_HEX8(0xfe, virtualLeds);
+    led_off();
+    TEST_ASSERT_EQUAL_HEX8(0x00, LED_OUT);
 }
 

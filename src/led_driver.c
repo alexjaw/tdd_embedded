@@ -1,33 +1,26 @@
 #include "led_driver.h"
+#include <stdint.h>
+#ifndef TEST
+    #include <avr/io.h>
+#else
+    #include "testable_registers.h"
+#endif
+#include "io_map.h"
 
-static uint8_t * ledsAddress;
-enum {ALL_LEDS_ON = ~0, ALL_LEDS_OFF = ~ALL_LEDS_ON};
-
-void led_driver_create(uint8_t * address)
+void led_init(void)
 {
-	ledsAddress = address;
-	*ledsAddress = 0b00000000;
+    LED_DIR     |= LEDMASK;
+    LEDPIN_CTRL |= PORT_INVEN_bm;
+    LED_OUT      = 0x00;
 }
 
-void led_driver_destroy()
-{}
-
-void led_driver_turn_on(uint8_t led)
+void led_on(void)
 {
-	*ledsAddress |= (1 << led);
+    LED_OUT |= LEDMASK;
 }
 
-void led_driver_turn_off(uint8_t led)
+void led_off(void)
 {
-	*ledsAddress &= ~(1 << led);
+    LED_OUT &= ~LEDMASK;
 }
 
-void led_driver_turn_all_off()
-{
-	*ledsAddress = ALL_LEDS_OFF;
-}
-
-void led_driver_turn_all_on()
-{
-    *ledsAddress = ALL_LEDS_ON;
-}
