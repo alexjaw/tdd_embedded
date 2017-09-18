@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "tdd_embedded", "tdd_embedded.cproj", "{6613110E-9718-482E-9965-31F005A76ADC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6613110E-9718-482E-9965-31F005A76ADC}.Debug|AVR.ActiveCfg = Debug|AVR
+		{6613110E-9718-482E-9965-31F005A76ADC}.Debug|AVR.Build.0 = Debug|AVR
+		{6613110E-9718-482E-9965-31F005A76ADC}.Release|AVR.ActiveCfg = Release|AVR
+		{6613110E-9718-482E-9965-31F005A76ADC}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
